@@ -6,9 +6,10 @@ from django.db.models import Q
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import CourseOrg, CityDict, Teacher
-from operation.models import UserFavorite
+from apps.operation.models import UserFavorite
 from forms import UserAskForm
-from courses.models import Course
+from apps.courses.models import Course
+
 
 # Create your views here.
 
@@ -17,6 +18,7 @@ class OrgView(View):
     """
     课程机构列表功能
     """
+
     def get(self, request):
         all_orgs = CourseOrg.objects.all()
 
@@ -78,6 +80,7 @@ class AddUserAskView(View):
     """
     用户添加咨询
     """
+
     def post(self, request):
         userask_form = UserAskForm(request.POST)
         if userask_form.is_valid():
@@ -93,6 +96,7 @@ class OrgHomeView(View):
     """
     机构首页
     """
+
     def get(self, request, org_id):
         current_page = 'home'
         course_org = CourseOrg.objects.get(id=int(org_id))
@@ -117,6 +121,7 @@ class OrgCourseView(View):
     """
     机构课程列表页
     """
+
     def get(self, request, org_id):
         current_page = 'course'
         course_org = CourseOrg.objects.get(id=int(org_id))
@@ -137,6 +142,7 @@ class OrgDescView(View):
     """
     机构介绍页
     """
+
     def get(self, request, org_id):
         current_page = 'desc'
         course_org = CourseOrg.objects.get(id=int(org_id))
@@ -155,6 +161,7 @@ class OrgTeacherView(View):
     """
     机构教师页
     """
+
     def get(self, request, org_id):
         current_page = 'teacher'
         course_org = CourseOrg.objects.get(id=int(org_id))
@@ -176,6 +183,7 @@ class AddFavView(View):
     """
     用户收藏，取消收藏
     """
+
     def post(self, request):
         fav_id = request.POST.get('fav_id', 0)
         fav_type = request.POST.get('fav_type', 0)
@@ -205,14 +213,15 @@ class TeacherListView(View):
     """
     讲师列表页
     """
+
     def get(self, request):
         all_teachers = Teacher.objects.all()
 
         search_keywords = request.GET.get('keywords', "")
         if search_keywords:
             all_teachers = all_teachers.filter(
-                Q(name__icontains=search_keywords)|
-                Q(work_company__icontains=search_keywords)|
+                Q(name__icontains=search_keywords) |
+                Q(work_company__icontains=search_keywords) |
                 Q(work_position__icontains=search_keywords))
 
         sort = request.GET.get('sort', "")
