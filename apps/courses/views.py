@@ -7,8 +7,8 @@ from django.http import HttpResponse
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Course, CourseResource, Video
-from operation.models import UserFavorite, CourseComments, UserCourse
-from utils.mixin_utils import LoginRequiredMixin
+from apps.operation.models import UserFavorite, CourseComments, UserCourse
+from apps.utils.mixin_utils import LoginRequiredMixin
 
 # Create your views here.
 

@@ -8,8 +8,8 @@ from django.contrib.auth.hashers import make_password
 
 from .models import UserProfile, EmailVerifyRecord
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyPwdForm, UploadImageForm
-from utils.email_send import send_register_email
-from utils.mixin_utils import LoginRequiredMixin
+from apps.utils.email_send import send_register_email
+from apps.utils.mixin_utils import LoginRequiredMixin
 
 
 class CustomBackend(ModelBackend):
