@@ -92,7 +92,8 @@ WSGI_APPLICATION = 'HFOnline.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hfonline',
+        # 'NAME': 'hfonline',
+        'NAME': 'test',
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST': '127.0.0.1',

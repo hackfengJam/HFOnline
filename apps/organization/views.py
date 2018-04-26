@@ -6,9 +6,12 @@ from django.db.models import Q
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import CourseOrg, CityDict, Teacher
-from apps.operation.models import UserFavorite
 from forms import UserAskForm
-from apps.courses.models import Course
+# from apps.operation.models import UserFavorite
+# from apps.courses.models import Course
+
+from operation.models import UserFavorite
+from courses.models import Course
 
 
 # Create your views here.

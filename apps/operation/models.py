@@ -4,10 +4,14 @@ from __future__ import unicode_literals
 from datetime import datetime
 
 from django.db import models
+#
+# from apps.users.models import UserProfile
+# from apps.courses.models import Course
+# from apps.organization.models import Teacher
 
-from apps.users.models import UserProfile
-from apps.courses.models import Course
-from apps.organization.models import Teacher
+from users.models import UserProfile
+from courses.models import Course
+from organization.models import Teacher
 
 
 # Create your models here.

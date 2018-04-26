@@ -3,7 +3,11 @@ from __future__ import unicode_literals
 from datetime import datetime
 
 from django.db import models
-from apps.organization.models import CourseOrg, Teacher
+from organization.models import CourseOrg, Teacher
+
+
+# from apps.organization.models import CourseOrg, Teacher
+
 
 # Create your models here.
 

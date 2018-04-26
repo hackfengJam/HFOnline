@@ -7,8 +7,12 @@ from django.http import HttpResponse
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Course, CourseResource, Video
-from apps.operation.models import UserFavorite, CourseComments, UserCourse
-from apps.utils.mixin_utils import LoginRequiredMixin
+# from apps.operation.models import UserFavorite, CourseComments, UserCourse
+# from apps.utils.mixin_utils import LoginRequiredMixin
+
+from operation.models import UserFavorite, CourseComments, UserCourse
+from utils.mixin_utils import LoginRequiredMixin
+
 
 # Create your views here.
 
@@ -22,8 +26,8 @@ class CourseListView(View):
 
         search_keywords = request.GET.get('keywords', "")
         if search_keywords:
-            all_courses = all_courses.filter(Q(name__icontains=search_keywords)|
-                                             Q(desc__icontains=search_keywords)|
+            all_courses = all_courses.filter(Q(name__icontains=search_keywords) |
+                                             Q(desc__icontains=search_keywords) |
                                              Q(detail__icontains=search_keywords))
 
         sort = request.GET.get('sort', "")
@@ -56,6 +60,7 @@ class VideoPlayView(View):
     """
     视频播放页面
     """
+
     def get(self, request, video_id):
         video = Video.objects.get(id=int(video_id))
         course = video.lesson.course
@@ -90,6 +95,7 @@ class CourseDetailView(View):
     """
     课程详情页
     """
+
     def get(self, request, course_id):
         course = Course.objects.get(id=int(course_id))
 
@@ -126,6 +132,7 @@ class CourseInfoView(LoginRequiredMixin, View):
     """
     课程章节信息
     """
+
     def get(self, request, course_id):
         course = Course.objects.get(id=int(course_id))
 
@@ -159,6 +166,7 @@ class CourseCommentView(LoginRequiredMixin, View):
     """
     课程评论信息
     """
+
     def get(self, request, course_id):
         course = Course.objects.get(id=int(course_id))
 
@@ -177,6 +185,7 @@ class AddCommentView(View):
     """
     用户添加课程评论
     """
+
     def post(self, request):
 
         if not request.user.is_authenticated():
