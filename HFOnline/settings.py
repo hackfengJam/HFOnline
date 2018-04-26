@@ -30,12 +30,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 AUTHENTICATION_BACKENDS = (
     'users.views.CustomBackend',
 )
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,8 +53,6 @@ INSTALLED_APPS = [
     'pure_pagination',
 ]
 AUTH_USER_MODEL = "users.UserProfile"
-
-
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'HFOnline.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
@@ -101,9 +96,9 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST': '127.0.0.1',
+        'PORT': 3306,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -122,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -162,6 +156,3 @@ EMAIL_FROM = "hackfunjiang@163.com"  # 发件人
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-
