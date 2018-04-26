@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import sys
+from . import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -92,18 +93,17 @@ WSGI_APPLICATION = 'HFOnline.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hfonline',
-        'USER': 'root',
+        'NAME': config["mysql"]["database"],
+        'USER': config["mysql"]["username"],
         # 'NAME': 'test',
         # 'PASSWORD': '123456',
         # 'HOST': '127.0.0.1',
-        'PASSWORD': 'root',
-        'HOST': '47.95.237.36',
-        'PORT': 3306,
-        'charset': 'utf8',
+        'PASSWORD': config["mysql"]["password"],
+        'HOST': config["mysql"]["host"],
+        'PORT': config["mysql"]["port"],
+        'CHARSET': config["mysql"]["charset"],
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
