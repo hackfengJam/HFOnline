@@ -8,4 +8,4 @@ log/
 tmp/
 .DS_Store
 apidoc/
-hfonline_env/
+hfonline_env/*
