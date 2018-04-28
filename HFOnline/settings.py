@@ -24,7 +24,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#ou+!7&_1hvh(k5tksl&gr)h4%76n1p*d1gr#*h$v3287*kke#'
+SECRET_KEY = config["secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -143,20 +143,20 @@ USE_TZ = False
 
 # TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
 
-STATIC_URL = '/static/'
+STATIC_URL = config["static"]["url"]
 
-STATIC_ROOT = '/static/'
+STATIC_ROOT = config["static"]["root"]
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-EMAIL_HOST = "smtp.163.com"
-EMAIL_PORT = 25
-EMAIL_HOST_USER = "hackfunjiang@163.com"  # 用户名
-EMAIL_HOST_PASSWORD = "qq553768563"  # 密码
-EMAIL_USE_TLS = False
-EMAIL_FROM = "hackfunjiang@163.com"  # 发件人
+EMAIL_HOST = config["email"]["host"]
+EMAIL_PORT = config["email"]["port"]
+EMAIL_HOST_USER = config["email"]["host_user"]  # 用户名
+EMAIL_HOST_PASSWORD = config["email"]["host_password"]  # 密码
+EMAIL_USE_TLS = True if config["email"]["use_tls"] == "yes" else False
+EMAIL_FROM = config["email"]["from"]  # 发件人
 
-MEDIA_URL = '/media/'
+MEDIA_URL = config["media"]["url"]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -1,3 +1,4 @@
+secret_key: '*************************'
 mysql:
   database: 'xxx'
   username: 'xxx'
@@ -5,3 +6,19 @@ mysql:
   host: 'xx.xx.xx.xx'
   port: 3306
   charset: 'utf8'
+
+email:
+  host: 'xxxx.xxx.com'
+  port: 25
+  host_user: 'xxx@xxx.com'
+  host_password: 'xxxxxx'
+  use_tls: no
+  from: 'xxx@xxx.com'
+
+media:
+  url: '/xxxx/'
+  root: 'xxxx'
+
+static:
+  url: '/xxxxx/'
+  root: '/xxxxx/'
