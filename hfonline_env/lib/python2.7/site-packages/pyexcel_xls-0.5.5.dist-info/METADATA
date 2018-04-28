@@ -1,0 +1,564 @@
+Metadata-Version: 2.0
+Name: pyexcel-xls
+Version: 0.5.5
+Summary: A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format
+Home-page: https://github.com/pyexcel/pyexcel-xls
+Author: C.W.
+Author-email: wangc_2011@hotmail.com
+License: New BSD
+Download-URL: https://github.com/pyexcel/pyexcel-xls/archive/0.5.5.tar.gz
+Description-Content-Type: UNKNOWN
+Keywords: xls,xlsx,xlsmpython
+Platform: UNKNOWN
+Classifier: Topic :: Office/Business
+Classifier: Topic :: Utilities
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Programming Language :: Python
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Dist: pyexcel-io (>=0.5.3)
+Requires-Dist: xlrd
+Requires-Dist: xlwt
+
+================================================================================
+pyexcel-xls - Let you focus on data, instead of xls format
+================================================================================
+
+.. image:: https://raw.githubusercontent.com/pyexcel/pyexcel.github.io/master/images/patreon.png
+   :target: https://www.patreon.com/pyexcel
+
+.. image:: https://api.travis-ci.org/pyexcel/pyexcel-xls.svg?branch=master
+   :target: http://travis-ci.org/pyexcel/pyexcel-xls
+
+.. image:: https://codecov.io/gh/pyexcel/pyexcel-xls/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/pyexcel/pyexcel-xls
+
+.. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
+   :target: https://gitter.im/pyexcel/Lobby
+
+
+**pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
+
+New flag: `detect_merged_cells` allows you to spread the same value among all merged cells. But be aware that this may slow down its reading performance.
+
+New flag: `skip_hidden_row_and_column` allows you to skip hidden rows and columns and is defaulted to **True**. It may slow down its reading performance. And it is only valid for 'xls' files. For 'xlsx' files, please use pyexcel-xlsx.
+
+
+Known constraints
+==================
+
+Fonts, colors and charts are not supported.
+
+Installation
+================================================================================
+
+
+You can install pyexcel-xls via pip:
+
+.. code-block:: bash
+
+    $ pip install pyexcel-xls
+
+
+or clone it and install it:
+
+.. code-block:: bash
+
+    $ git clone https://github.com/pyexcel/pyexcel-xls.git
+    $ cd pyexcel-xls
+    $ python setup.py install
+
+Support the project
+================================================================================
+
+If your company has embedded pyexcel and its components into a revenue generating
+product, please `support me on patreon <https://www.patreon.com/bePatron?u=5537627>`_ to
+maintain the project and develop it further.
+
+If you are an individual, you are welcome to support me too on patreon and for however long
+you feel like. As a patreon, you will receive
+`early access to pyexcel related contents <https://www.patreon.com/pyexcel/posts>`_.
+
+With your financial support, I will be able to invest
+a little bit more time in coding, documentation and writing interesting posts.
+
+
+Usage
+================================================================================
+
+As a standalone library
+--------------------------------------------------------------------------------
+
+Write to an xls file
+********************************************************************************
+
+
+
+Here's the sample code to write a dictionary to an xls file:
+
+.. code-block:: python
+
+    >>> from pyexcel_xls import save_data
+    >>> data = OrderedDict() # from collections import OrderedDict
+    >>> data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
+    >>> data.update({"Sheet 2": [["row 1", "row 2", "row 3"]]})
+    >>> save_data("your_file.xls", data)
+
+
+Read from an xls file
+********************************************************************************
+
+Here's the sample code:
+
+.. code-block:: python
+
+    >>> from pyexcel_xls import get_data
+    >>> data = get_data("your_file.xls")
+    >>> import json
+    >>> print(json.dumps(data))
+    {"Sheet 1": [[1, 2, 3], [4, 5, 6]], "Sheet 2": [["row 1", "row 2", "row 3"]]}
+
+
+Write an xls to memory
+********************************************************************************
+
+Here's the sample code to write a dictionary to an xls file:
+
+.. code-block:: python
+
+    >>> from pyexcel_xls import save_data
+    >>> data = OrderedDict()
+    >>> data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
+    >>> data.update({"Sheet 2": [[7, 8, 9], [10, 11, 12]]})
+    >>> io = StringIO()
+    >>> save_data(io, data)
+    >>> # do something with the io
+    >>> # In reality, you might give it to your http response
+    >>> # object for downloading
+
+
+
+
+Read from an xls from memory
+********************************************************************************
+
+Continue from previous example:
+
+.. code-block:: python
+
+    >>> # This is just an illustration
+    >>> # In reality, you might deal with xls file upload
+    >>> # where you will read from requests.FILES['YOUR_XLS_FILE']
+    >>> data = get_data(io)
+    >>> print(json.dumps(data))
+    {"Sheet 1": [[1, 2, 3], [4, 5, 6]], "Sheet 2": [[7, 8, 9], [10, 11, 12]]}
+
+
+Pagination feature
+********************************************************************************
+
+
+
+Let's assume the following file is a huge xls file:
+
+.. code-block:: python
+
+   >>> huge_data = [
+   ...     [1, 21, 31],
+   ...     [2, 22, 32],
+   ...     [3, 23, 33],
+   ...     [4, 24, 34],
+   ...     [5, 25, 35],
+   ...     [6, 26, 36]
+   ... ]
+   >>> sheetx = {
+   ...     "huge": huge_data
+   ... }
+   >>> save_data("huge_file.xls", sheetx)
+
+And let's pretend to read partial data:
+
+.. code-block:: python
+
+   >>> partial_data = get_data("huge_file.xls", start_row=2, row_limit=3)
+   >>> print(json.dumps(partial_data))
+   {"huge": [[3, 23, 33], [4, 24, 34], [5, 25, 35]]}
+
+And you could as well do the same for columns:
+
+.. code-block:: python
+
+   >>> partial_data = get_data("huge_file.xls", start_column=1, column_limit=2)
+   >>> print(json.dumps(partial_data))
+   {"huge": [[21, 31], [22, 32], [23, 33], [24, 34], [25, 35], [26, 36]]}
+
+Obvious, you could do both at the same time:
+
+.. code-block:: python
+
+   >>> partial_data = get_data("huge_file.xls",
+   ...     start_row=2, row_limit=3,
+   ...     start_column=1, column_limit=2)
+   >>> print(json.dumps(partial_data))
+   {"huge": [[23, 33], [24, 34], [25, 35]]}
+
+As a pyexcel plugin
+--------------------------------------------------------------------------------
+
+No longer, explicit import is needed since pyexcel version 0.2.2. Instead,
+this library is auto-loaded. So if you want to read data in xls format,
+installing it is enough.
+
+
+Reading from an xls file
+********************************************************************************
+
+Here is the sample code:
+
+.. code-block:: python
+
+    >>> import pyexcel as pe
+    >>> sheet = pe.get_book(file_name="your_file.xls")
+    >>> sheet
+    Sheet 1:
+    +---+---+---+
+    | 1 | 2 | 3 |
+    +---+---+---+
+    | 4 | 5 | 6 |
+    +---+---+---+
+    Sheet 2:
+    +-------+-------+-------+
+    | row 1 | row 2 | row 3 |
+    +-------+-------+-------+
+
+
+Writing to an xls file
+********************************************************************************
+
+Here is the sample code:
+
+.. code-block:: python
+
+    >>> sheet.save_as("another_file.xls")
+
+
+Reading from a IO instance
+********************************************************************************
+
+You got to wrap the binary content with stream to get xls working:
+
+.. code-block:: python
+
+    >>> # This is just an illustration
+    >>> # In reality, you might deal with xls file upload
+    >>> # where you will read from requests.FILES['YOUR_XLS_FILE']
+    >>> xlsfile = "another_file.xls"
+    >>> with open(xlsfile, "rb") as f:
+    ...     content = f.read()
+    ...     r = pe.get_book(file_type="xls", file_content=content)
+    ...     print(r)
+    ...
+    Sheet 1:
+    +---+---+---+
+    | 1 | 2 | 3 |
+    +---+---+---+
+    | 4 | 5 | 6 |
+    +---+---+---+
+    Sheet 2:
+    +-------+-------+-------+
+    | row 1 | row 2 | row 3 |
+    +-------+-------+-------+
+
+
+Writing to a StringIO instance
+********************************************************************************
+
+You need to pass a StringIO instance to Writer:
+
+.. code-block:: python
+
+    >>> data = [
+    ...     [1, 2, 3],
+    ...     [4, 5, 6]
+    ... ]
+    >>> io = StringIO()
+    >>> sheet = pe.Sheet(data)
+    >>> io = sheet.save_to_memory("xls", io)
+    >>> # then do something with io
+    >>> # In reality, you might give it to your http response
+    >>> # object for downloading
+
+
+License
+================================================================================
+
+New BSD License
+
+Developer guide
+==================
+
+Development steps for code changes
+
+#. git clone https://github.com/pyexcel/pyexcel-xls.git
+#. cd pyexcel-xls
+
+Upgrade your setup tools and pip. They are needed for development and testing only:
+
+#. pip install --upgrade setuptools pip
+
+Then install relevant development requirements:
+
+#. pip install -r rnd_requirements.txt # if such a file exists
+#. pip install -r requirements.txt
+#. pip install -r tests/requirements.txt
+
+Once you have finished your changes, please provide test case(s), relevant documentation
+and update CHANGELOG.rst.
+
+.. note::
+
+    As to rnd_requirements.txt, usually, it is created when a dependent
+    library is not released. Once the dependecy is installed
+    (will be released), the future
+    version of the dependency in the requirements.txt will be valid.
+
+
+How to test your contribution
+------------------------------
+
+Although `nose` and `doctest` are both used in code testing, it is adviable that unit tests are put in tests. `doctest` is incorporated only to make sure the code examples in documentation remain valid across different development releases.
+
+On Linux/Unix systems, please launch your tests like this::
+
+    $ make
+
+On Windows systems, please issue this command::
+
+    > test.bat
+
+How to update test environment and update documentation
+---------------------------------------------------------
+
+Additional steps are required:
+
+#. pip install moban
+#. git clone https://github.com/moremoban/setupmobans.git # generic setup
+#. git clone https://github.com/pyexcel/pyexcel-commons.git commons
+#. make your changes in `.moban.d` directory, then issue command `moban`
+
+What is pyexcel-commons
+---------------------------------
+
+Many information that are shared across pyexcel projects, such as: this developer guide, license info, etc. are stored in `pyexcel-commons` project.
+
+What is .moban.d
+---------------------------------
+
+`.moban.d` stores the specific meta data for the library.
+
+Acceptance criteria
+-------------------
+
+#. Has Test cases written
+#. Has all code lines tested
+#. Passes all Travis CI builds
+#. Has fair amount of documentation if your change is complex
+#. Please update CHANGELOG.rst
+#. Please add yourself to CONTRIBUTORS.rst
+#. Agree on NEW BSD License for your contribution
+
+Known Issues
+=============
+
+* If a zero was typed in a DATE formatted field in xls, you will get "01/01/1900".
+* If a zero was typed in a TIME formatted field in xls, you will get "00:00:00".
+
+
+Change log
+================================================================================
+
+0.5.5 - 8.11.2017
+--------------------------------------------------------------------------------
+
+Added
+********************************************************************************
+
+#. `#25 <https://github.com/pyexcel/pyexcel-xls/issues/25>`_, detect merged
+   cell in .xls
+
+0.5.4 - 2.11.2017
+--------------------------------------------------------------------------------
+
+Added
+********************************************************************************
+
+#. `#24 <https://github.com/pyexcel/pyexcel-xls/issues/24>`_, xlsx format cannot
+   use skip_hidden_row_and_column. please use pyexcel-xlsx instead.
+
+0.5.3 - 2.11.2017
+--------------------------------------------------------------------------------
+
+Added
+********************************************************************************
+
+#. `#21 <https://github.com/pyexcel/pyexcel-xls/issues/21>`_, skip hidden rows
+   and columns under 'skip_hidden_row_and_column' flag.
+
+0.5.2 - 23.10.2017
+--------------------------------------------------------------------------------
+
+updated
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#. pyexcel `#105 <https://github.com/pyexcel/pyexcel/issues/105>`_, remove gease
+   from setup_requires, introduced by 0.5.1.
+#. remove python2.6 test support
+#. update its dependecy on pyexcel-io to 0.5.3
+
+0.5.1 - 20.10.2017
+--------------------------------------------------------------------------------
+
+added
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#. `#103 <https://github.com/pyexcel/pyexcel/issues/103>`_, include LICENSE file
+   in MANIFEST.in, meaning LICENSE file will appear in the released tar ball.
+=======
+
+
+0.5.0 - 30.08.2017
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#20 <https://github.com/pyexcel/pyexcel-xls/issues/20>`_, is handled in
+   pyexcel-io
+#. put dependency on pyexcel-io 0.5.0, which uses cStringIO instead of StringIO.
+   Hence, there will be performance boost in handling files in memory.
+
+0.4.1 - 25.08.2017
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#20 <https://github.com/pyexcel/pyexcel-xls/issues/20>`_, handle unseekable
+   stream given by http response.
+
+0.4.0 - 19.06.2017
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#15 <https://github.com/pyexcel/pyexcel-xlsx/issues/15>`_, close file handle
+#. pyexcel-io plugin interface now updated to use
+   `lml <https://github.com/chfw/lml>`_.
+
+0.3.3 - 30/05/2017
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#18 <https://github.com/pyexcel/pyexcel-xls/issues/18>`_, pass on
+   encoding_override and others to xlrd.
+
+0.3.2 - 18.05.2017
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#16 <https://github.com/pyexcel/pyexcel-xls/issues/16>`_, allow mmap to
+   be passed as file content
+
+
+0.3.1 - 16.01.2017
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#14 <https://github.com/pyexcel/pyexcel-xls/issues/14>`_, Python 3.6 -
+   cannot use LOCALE flag with a str pattern
+#. fix its dependency on pyexcel-io 0.3.0
+
+0.3.0 - 22.12.2016
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#13 <https://github.com/pyexcel/pyexcel-xls/issues/13>`_, alert on empyty
+   file content
+#. Support pyexcel-io v0.3.0
+
+0.2.3 - 20.09.2016
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#10 <https://github.com/pyexcel/pyexcel-xls/issues/10>`_, To support
+   generator as member of the incoming two dimensional data
+
+0.2.2 - 31.08.2016
+--------------------------------------------------------------------------------
+
+Added
+********************************************************************************
+
+#. support pagination. two pairs: start_row, row_limit and start_column,
+   column_limit help you deal with large files.
+
+0.2.1 - 13.07.2016
+--------------------------------------------------------------------------------
+
+Added
+********************************************************************************
+
+#. `#9 <https://github.com/pyexcel/pyexcel-xls/issues/9>`_, `skip_hidden_sheets`
+   is added. By default, hidden sheets are skipped when reading all sheets.
+   Reading sheet by name or by index are not affected.
+
+
+0.2.0 - 01.06.2016
+--------------------------------------------------------------------------------
+
+Added
+********************************************************************************
+
+#. By default, `float` will be converted to `int` where fits. `auto_detect_int`,
+   a flag to switch off the autoatic conversion from `float` to `int`.
+#. 'library=pyexcel-xls' was added so as to inform pyexcel to use it instead of
+   other libraries, in the situation where there are more than one plugin for
+   a file type, e.g. xlsm
+
+
+Updated
+********************************************************************************
+
+#. support the auto-import feature of pyexcel-io 0.2.0
+#. xlwt is now used for python 2 implementation while xlwt-future is used for
+   python 3
+
+0.1.0 - 17.01.2016
+--------------------------------------------------------------------------------
+
+Added
+********************************************************************************
+
+#. Passing "streaming=True" to get_data, you will get the two dimensional array
+   as a generator
+#. Passing "data=your_generator" to save_data is acceptable too.
+
+
+
+

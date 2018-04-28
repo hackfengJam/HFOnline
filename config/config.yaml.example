@@ -1,0 +1,7 @@
+mysql:
+  database: 'xxx'
+  username: 'xxx'
+  password: 'xxx'
+  host: 'xx.xx.xx.xx'
+  port: 3306
+  charset: 'utf8'
