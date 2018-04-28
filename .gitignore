@@ -4,9 +4,8 @@
 dep.sh
 config.yaml
 config.json
-env_*.py
 log/
 tmp/
 .DS_Store
 apidoc/
-venv/
+hfonline_env/
