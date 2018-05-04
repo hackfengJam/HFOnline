@@ -1,0 +1,30 @@
+before_script:
+    - rm -rf /root/go/src/cloudcare-backend
+    - mkdir -p /root/go/src/cloudcare-backend/
+    - mv * /root/go/src/cloudcare-backend/
+    - cd /root/go/src/cloudcare-backend/
+
+stages:
+   - deploy
+
+build:
+  stage: deploy
+  only:
+    - master
+  script:
+  - docker build -t cloudcare-backend:latest .
+  - docker tag cloudcare-backend registry.jiagouyun.com/cloudcare-backend
+  - docker push registry.jiagouyun.com/cloudcare-backend
+  tags:
+  - docker
+
+buildTesting:
+  stage: deploy
+  only:
+    - master
+  script:
+  - docker build -t cloudcare-backend:testing .
+  - docker tag cloudcare-backend:testing registry.jiagouyun.com/cloudcare-backend:testing
+  - docker push registry.jiagouyun.com/cloudcare-backend:testing
+  tags:
+  - docker
