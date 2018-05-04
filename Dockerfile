@@ -1,11 +1,11 @@
-FROM python:2.7.13
+FROM python:2.7.10
 
-Label maitainer "fangzhou@jiagouyun.com"
+Label maitainer "hackfunjiang@163.com"
 
-RUN mkdir -p /config/cloudcare-backend
+RUN mkdir -p /config/HFOnline
 RUN mkdir /config/logs
 
-ADD . /config/cloudcare-backend/
+ADD . /config/HFOnline/
 
-WORKDIR /config/cloudcare-backend
-RUN pip install -i https://mirrors.aliyun.com/pypi/simple/ -r /config/cloudcare-backend/requirements.txt
+WORKDIR /config/HFOnline
+RUN pip install -i https://mirrors.aliyun.com/pypi/simple/ -r /config/HFOnline/requirements.txt
