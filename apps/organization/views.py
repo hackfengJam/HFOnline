@@ -89,9 +89,10 @@ class AddUserAskView(View):
         if userask_form.is_valid():
             user_ask = userask_form.save(commit=True)
             # 异步操作，ajax应该返回json
-            return HttpResponse("{'status':'success'}", content_type='application/json')
+            # return HttpResponse("{'status':'success'}", content_type='application/json')
+            return HttpResponse('{"status":"success"}', content_type='application/json')
         else:
-            return HttpResponse("{'status':'fail', 'msg':'添加出错'}", content_type='application/json')
+            return HttpResponse('{"status":"fail", "msg":"添加出错"}', content_type='application/json')
             # return HttpResponse("{'status':'fail', 'msg':{0}}".format(userask_form.errors))
 
 
