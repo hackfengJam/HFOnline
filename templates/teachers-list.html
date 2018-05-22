@@ -26,7 +26,7 @@
 					<li {% if sort == '' %}class="active"{% endif %}><a href="?sort=">全部</a> </li>
 					<li {% if sort == 'hot' %}class="active"{% endif %}><a href="?sort=hot">人气 &#8595;</a></li>
 				</ul>
-                <div class="fr butler-num">共<span class="key">9</span>人&nbsp;&nbsp;&nbsp;</div>
+                <div class="fr butler-num">共<span class="key">{{ all_count }}</span>人&nbsp;&nbsp;&nbsp;</div>
 			</div>
                 {% for teacher in all_teachers.object_list %}
                 <dl class="des">

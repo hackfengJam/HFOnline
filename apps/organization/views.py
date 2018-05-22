@@ -227,7 +227,7 @@ class TeacherListView(View):
                 Q(name__icontains=search_keywords) |
                 Q(work_company__icontains=search_keywords) |
                 Q(work_position__icontains=search_keywords))
-
+        count = len(all_teachers)
         sort = request.GET.get('sort', "")
         if sort:
             if sort == "hot":
@@ -250,6 +250,7 @@ class TeacherListView(View):
         return render(request, "teachers-list.html", {
             "all_teachers": teachers,
             "sorted_teachers": sorted_teachers,
+            "all_count": count,
             "sort": sort,
         })
 
