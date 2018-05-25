@@ -42,8 +42,8 @@
                             <a href="?ct={{ category }}"><span class="{% ifequal city_id '' %}active2{% endifequal %}">全部</span></a>
                             {% for city in all_citys %}
                             <a href="?city={{ city.id }}&ct={{ category }}"><span
-                                    class="{% ifequal city_id city.id|stringformat:" i" %}active2{% endifequal %}">{{
-                                city.name }}</span></a>
+                                    class="{% ifequal city_id city.id|stringformat:" i" %}active2{% endifequal %}">
+                                {{ city.name }}</span></a>
                             {% endfor %}
 
                         </div>

@@ -1,10 +1,12 @@
 # -*- coding:utf-8 -*-
+import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 from django.views.generic.base import View
 from django.contrib.auth.hashers import make_password
+from django.http.response import HttpResponse
 
 from .models import UserProfile, EmailVerifyRecord
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyPwdForm, UploadImageForm
@@ -48,7 +50,7 @@ class RegisterView(View):
         if register_form.is_valid():
             user_name = request.POST.get("email", "")
             if UserProfile.objects.filter(email=user_name):
-                return render(request, "register.html", {"register_form": register_form, "msg": "用户已经存在！"})
+                return render(request, "register.html", {"register_form": register_form, "msg": u"用户已经存在！"})
             pass_word = request.POST.get("password", "")
             user_profile = UserProfile()
             user_profile.username = user_name
@@ -112,6 +114,10 @@ class ResetView(View):
 
 
 class ModifyPwdView(View):
+    """
+    修改用户密码
+    """
+
     def post(self, request):
         modify_form = ModifyPwdForm(request.POST)
         if modify_form.is_valid():
@@ -145,13 +151,39 @@ class UploadImageView(LoginRequiredMixin, View):
     """
 
     def post(self, request):
-        image_form = UploadImageForm(request.POST, request.FILES)
-        # image_form = UploadImageForm(request.POST, request.FILES, instance=)
-
+        # image_form = UploadImageForm(request.POST, request.FILES)
+        #
+        # if image_form.is_valid():
+        #     image = image_form.cleaned_data['image']
+        #     request.user.image = image
+        #     request.user.save()
+        image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
         if image_form.is_valid():
-            image = image_form.cleaned_data['image']
-            request.user.image = image
-            request.user.save()
+            image_form.save()
+            return HttpResponse('{"status":"success"}', content_type='application/json')
+        else:
+            return HttpResponse('{"status":"fail"}', content_type='application/json')
+
+
+class UpdatePwdView(View):
+    """
+    个人中心修改用户密码
+    """
+
+    def post(self, request):
+        modify_form = ModifyPwdForm(request.POST)
+        if modify_form.is_valid():
+            pwd1 = request.POST.get("password1", "")
+            pwd2 = request.POST.get("password2", "")
+            if pwd1 != pwd2:
+                return HttpResponse('{"status":"fail","msg":"密码不一致"}', content_type='application/json')
+            user = request.user
+            user.password = make_password(pwd1)
+            user.save()
+
+            return HttpResponse('{"status":"success"}', content_type='application/json')
+        else:
+            return HttpResponse(json.dumps(modify_form.errors), content_type='application/json')
 
 # Create your views here.
 # def user_login(request):

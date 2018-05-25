@@ -48,7 +48,7 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 
     # 用户相关url配置
-    url(r'^user/', include('users.urls', namespace="user")),
+    url(r'^users/', include('users.urls', namespace="users")),
 
 ]
 
