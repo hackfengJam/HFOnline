@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 import json
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 from django.views.generic.base import View
 from django.contrib.auth.hashers import make_password
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 
 from .models import UserProfile, EmailVerifyRecord
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyPwdForm, UploadImageForm, UserInfoForm
@@ -73,6 +73,17 @@ class RegisterView(View):
             return render(request, "login.html")
         else:
             return render(request, "register.html", {"register_form": register_form})
+
+
+class LogoutView(View):
+    """
+    用户登出
+    """
+
+    def get(self, request):
+        logout(request)
+        from django.core.urlresolvers import reverse
+        return HttpResponseRedirect(reverse("index"))
 
 
 class LoginView(View):
