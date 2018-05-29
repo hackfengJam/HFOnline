@@ -26,7 +26,7 @@
                     {% if request.user.is_authenticated %}
                         <div class="personal">
                             <dl class="user fr">
-                                <dd>{{ request.user.username }}<img class="down fr" src="{% static "/static/images/top_down.png" %}"/></dd>
+                                <dd>{{ request.user.username }}<img class="down fr" src="{% static "images/top_down.png" %}"/></dd>
                                 <dt><img width="20" height="20" src="{{ MEDIA_URL }}{{ request.user.image }}"/></dt>
                             </dl>
                             <div class="userdetail">
@@ -43,6 +43,13 @@
                                 </div>
                             </div>
                         </div>
+                        <a href="">
+                            <div class="msg-num">
+                                {% if user.unread_nums > 0 %}
+                                    <span id="MsgNum">{{ user.unread_nums }}</span>
+                                {% endif %}
+                            </div>
+                        </a>
                         {% else %}
                          <a style="color:white" class="fr registerbtn" href="{% url 'register' %}">注册</a>
                          <a style="color:white" class="fr loginbtn" href="{% url 'login' %}">登录</a>

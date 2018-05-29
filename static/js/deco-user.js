@@ -40,7 +40,7 @@ function sendCodeChangeEmail($btn){
 function changeEmailSubmit($btn){
 var verify = verifyDialogSubmit(
         [
-          {id: '#jsChangeEmail', tips: Dml.Msg.epMail, errorTips: Dml.Msg.erMail, regName: 'email', require: true},
+          {id: '#jsChangeEmail', tips: Dml.Msg.epMail, errorTips: Dml.Msg.erMail, regName: 'email', require: true}
         ]
     );
     if(!verify){
@@ -50,7 +50,7 @@ var verify = verifyDialogSubmit(
         cache: false,
         type: 'post',
         dataType:'json',
-        url:"/users/update_email/ ",
+        url:"/users/update_email/",
         data:$('#jsChangeEmailForm').serialize(),
         async: true,
         beforeSend:function(XMLHttpRequest){
@@ -66,6 +66,7 @@ var verify = verifyDialogSubmit(
                 setTimeout(function(){location.reload();},1000);
             }else{
                  Dml.fun.showValidateError($('#jsChangeEmail'), "邮箱信息更新失败");
+                 // Dml.fun.showValidateError($('#jsChangeEmailCode'), data.msg);
             }
         },
         complete: function(XMLHttpRequest){
