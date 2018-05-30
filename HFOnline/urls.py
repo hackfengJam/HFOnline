@@ -25,7 +25,7 @@ from django.views.static import serve
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
 from users.views import IndexView
 from organization.views import OrgView
-from HFOnline.settings import MEDIA_ROOT
+from HFOnline.settings import MEDIA_ROOT, STATIC_ROOT
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -50,7 +50,15 @@ urlpatterns = [
     # 配置上传文件的处理函数
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 
+    # 为了debug为True
+    url(r'^static/(?P<path>.*)$', serve, {"document_root": STATIC_ROOT}),
+
     # 用户相关url配置
     url(r'^users/', include('users.urls', namespace="users")),
 
 ]
+
+# 全局404页面配置
+handler403 = 'users.views.page_not_found'
+handler404 = 'users.views.page_not_found'
+handler500 = 'users.views.page_error'

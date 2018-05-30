@@ -27,9 +27,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = config["secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config['debug']
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 AUTHENTICATION_BACKENDS = (
@@ -145,7 +145,7 @@ USE_TZ = False
 
 STATIC_URL = config["static"]["url"]
 
-STATIC_ROOT = config["static"]["root"]
+# STATIC_ROOT = config["static"]["root"]
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
@@ -160,3 +160,4 @@ EMAIL_FROM = config["email"]["from"]  # 发件人
 
 MEDIA_URL = config["media"]["url"]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
