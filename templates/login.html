@@ -40,8 +40,8 @@
             <p class="fl hd-tips">慕学在线网，在线学习平台！</p>
             <ul class="fr hd-bar">
                 <li>服务电话：<span>800-8208820</span></li>
-                <li class="active"><a href="/login/">[登录]</a></li>
-                <li><a href="register.html">[注册]</a></li>
+                <li class="active"><a href="{% url 'login' %}">[登录]</a></li>
+                <li><a href="{% url 'register' %}">[注册]</a></li>
             </ul>
         </div>
     </div>
@@ -67,7 +67,7 @@
             </div>
             <div class="fl form-box">
                 <h2>帐号登录</h2>
-                <form action="/login/" method="post" autocomplete="off">
+                <form action="{% static 'login' %}" method="post" autocomplete="off">
 {#                    <input type='hidden' name='csrfmiddlewaretoken' value='mymQDzHWl2REXIfPMg2mJaLqDfaS1sD5' />#}
                     {% csrf_token %}
                     <div class="form-group marb20 {% if login_form.errors.username %} errorput {% endif %}">
@@ -88,7 +88,7 @@
 {#                <input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy' />#}
 
                 </form>
-                <p class="form-p">没有慕学在线网帐号？<a href="register.html">[立即注册]</a></p>
+                <p class="form-p">没有 HFOnline 帐号？<a href="{% url 'register' %}">[立即注册]</a></p>
             </div>
         </div>
     </div>
