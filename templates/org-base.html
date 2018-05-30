@@ -46,11 +46,11 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="">
+                        <a href="{% url 'users:mymessage' %}">
                             <div class="msg-num">
-                                {% if user.unread_nums > 0 %}
-                                    <span id="MsgNum">{{ user.unread_nums }}</span>
-                                {% endif %}
+{#                                {% if user.unread_nums > 0 %}#}
+                                <span id="MsgNum">{{ user.unread_nums }}</span>
+{#                                {% endif %}#}
                             </div>
                         </a>
                         {% else %}

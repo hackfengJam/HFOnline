@@ -18,6 +18,7 @@ from operation.models import UserCourse, UserFavorite, UserMessage
 from organization.models import CourseOrg, Teacher
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from courses.models import Course
+from .models import Banner
 
 
 class CustomBackend(ModelBackend):
@@ -323,6 +324,12 @@ class MymessageView(LoginRequiredMixin, View):
     def get(self, request):
         all_message = UserMessage.objects.filter(user=request.user.id)
 
+        # 用户进入个人消息后，清空未读消息
+        all_unread_messages = UserMessage.objects.filter(user=request.user.id, has_read=False)
+        for unread_message in all_unread_messages:
+            unread_message.has_read = True
+            unread_message.save()
+
         # 对课程机构进行分页
         try:
             page = request.GET.get('page', 1)
@@ -338,6 +345,25 @@ class MymessageView(LoginRequiredMixin, View):
         return render(request, "usercenter-message.html", {
             "messages": messages
 
+        })
+
+
+class IndexView(View):
+    def get(self, request):
+        all_banners = Banner.objects.all().order_by('index')
+        topn_courses = Course.objects.filter(is_banner=False)[:9]
+        banner_courses = Course.objects.filter(is_banner=True)[:3]
+        if len(banner_courses) == 0:
+            banner_courses = topn_courses[:3]
+            courses = topn_courses[3:]
+        else:
+            courses = topn_courses[:6]
+        course_orgs = CourseOrg.objects.all()[:15]
+        return render(request, "index.html", {
+            "courses": courses,
+            "banner_courses": banner_courses,
+            "course_orgs": course_orgs,
+            "all_banners": all_banners,
         })
 
 # Create your views here.

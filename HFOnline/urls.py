@@ -22,13 +22,16 @@ from django.views.generic import TemplateView
 import xadmin
 from django.views.static import serve
 
-from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView,LogoutView
+from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
+from users.views import IndexView
 from organization.views import OrgView
 from HFOnline.settings import MEDIA_ROOT
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
-    url('^$', TemplateView.as_view(template_name='index.html'), name="index"),
+    # url('^$', TemplateView.as_view(template_name='index.html'), name="index"),
+    url('^$', IndexView.as_view(), name="index"),
+
     url('^login/$', LoginView.as_view(), name="login"),
     url('^logout/$', LogoutView.as_view(), name="logout"),
     url('^register/$', RegisterView.as_view(), name="register"),
@@ -37,7 +40,6 @@ urlpatterns = [
     url(r'^forget/$', ForgetPwdView.as_view(), name="forget_pwd"),
     url(r'^reset/(?P<active_code>.*)/$', ResetView.as_view(), name="reset_pwd"),
     url(r'^modify_pwd/$', ModifyPwdView.as_view(), name="modify_pwd"),
-
 
     # 课程机构url配置
     url(r'^org/', include('organization.urls', namespace="org")),
@@ -52,5 +54,3 @@ urlpatterns = [
     url(r'^users/', include('users.urls', namespace="users")),
 
 ]
-
-
