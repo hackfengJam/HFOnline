@@ -20,11 +20,12 @@ class CityDictAdmin(object):
 
 class CourseOrgAdmin(object):
     # 显示列
-    list_display = ['name', 'desc', 'click_nums', 'fav_nums', 'image', 'address', 'city', 'add_time']
+    list_display = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city']
     # 搜索框
-    search_fields = ['name', 'desc', 'click_nums', 'fav_nums', 'image', 'address', 'city']
+    search_fields = ['name', 'desc', 'click_nums', 'fav_nums', 'address']
     # 过滤器
-    list_filter = ['name', 'desc', 'click_nums', 'fav_nums', 'image', 'address', 'city', 'add_time']
+    list_filter = ['name', 'desc', 'click_nums', 'fav_nums', 'address']
+    relfield_style = 'fk-ajax'
 
 
 class TeacherAdmin(object):
