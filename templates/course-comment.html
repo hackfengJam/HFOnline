@@ -113,11 +113,11 @@
                         <div class="box mb40">
                         <h4>讲师提示</h4>
                         <div class="teacher-info">
-                            <a href="/u/315464/courses?sort=publish" target="_blank">
+                            <a href="{% url 'org:teacher_detail' course.teacher.id %}" target="_blank">
                                 <img src='{{ MEDIA_URL }}{{ course.teacher.image }}' width='80' height='80' />
                             </a>
         <span class="tit">
-          <a href="/u/315464/courses?sort=publish" target="_blank">{{ course.teacher.name }}</a>
+          <a href="{% url 'org:teacher_detail' course.teacher.id %}" target="_blank">{{ course.teacher.name }}</a>
         </span>
                             <span class="job">{{ course.teacher.work_position }}</span>
                         </div>
@@ -142,46 +142,16 @@
                                 <div class="cp-tab-pannel js-comp-tab-pannel" data-pannel="course" style="display: block">
                                     <!-- img 200 x 112 -->
                                     <ul class="other-list">
-                                        <li class="curr">
-                                            <a href="/view/85?src=sug" target="_blank">
-                                                <img src="http://img.mukewang.com/57035ff200014b8a06000338-240-135.jpg" alt="Java入门第一季">
-                                                <span class="name autowrap">Java入门第一季</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/view/110?src=sug" target="_blank">
-                                                <img src="http://img.mukewang.com/5703604a0001694406000338-240-135.jpg" alt="Java入门第三季">
-                                                <span class="name autowrap">Java入门第三季</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/view/124?src=sug" target="_blank">
-                                                <img src="http://img.mukewang.com/570360620001390f06000338-240-135.jpg" alt="Java入门第二季">
-                                                <span class="name autowrap">Java入门第二季</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/view/47?src=sug" target="_blank">
-                                                <img src="http://img.mukewang.com/570765d90001bf1406000338-240-135.jpg" alt="Spring MVC起步">
-                                                <span class="name autowrap">Spring MVC起步</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/view/36?src=sug" target="_blank">
-                                                <img src="http://img.mukewang.com/53e1d0470001ad1e06000338-240-135.jpg" alt="JavaScript入门篇">
-                                                <span class="name autowrap">JavaScript入门篇</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="cp-tab-pannel js-comp-tab-pannel" data-pannel="plan">
-                                    <ul class="other-list">
-                                        <li class="curr">
-                                            <a href="/course/programdetail/pid/31?src=sug" target="_blank">
-                                                <img src="http://img.mukewang.com/56551e6700018b0c09600720-240-135.jpg" alt="Java工程师">
-                                                <span class="name autowrap">Java工程师</span>
-                                            </a>
-                                        </li>
+                                    {% for relate_course in relate_courses %}
+
+                                    <li class="curr">
+                                        <a href="{% url 'course:course_detail' relate_course.id %}" target="_blank">
+                                            <img src="{{ MEDIA_URL }}{{ relate_course.image }}" alt="{{ relate_course.name }}">
+                                            <span class="name autowrap">{{ relate_course.name }}</span>
+                                        </a>
+                                    </li>
+
+                                    {% endfor %}
                                     </ul>
                                 </div>
                             </div>

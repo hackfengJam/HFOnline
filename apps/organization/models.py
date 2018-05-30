@@ -71,3 +71,8 @@ class Teacher(models.Model):
 
     def get_course_nums(self):
         return self.course_set.all().count()
+
+    def get_leasted_course(self):
+        from courses.models import Course
+        leasted_course = Course.objects.filter(teacher=self).order_by('add_time')[:1]
+        return leasted_course

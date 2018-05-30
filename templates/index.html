@@ -94,7 +94,7 @@
                                     <a href="{% url 'course:course_detail' course.id %}">
                                         <h2 title="{{ course.name }}">{{ course.name }}</h2>
                                     </a>
-                                    <span class="fl">难度：<i class="key">{{ course.degree }}</i></span>
+                                    <span class="fl">难度：<i class="key">{{ course.get_degree_display }}</i></span>
                                     <span class="fr">学习人数：{{ course.students }}</span>
                                 </div>
                                 <div class="bottom">

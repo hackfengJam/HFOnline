@@ -63,9 +63,9 @@
                         <li><a id="commentOn" class="" href="{% url 'course:course_comments' course.id %} "><span>评论</span></a></li>
                     </ul>
                 </div>
-                <div id="notice" class="clearfix">
-                    <div class="l"> <strong>课程公告:</strong> <a  href="javascript:void(0)">Spring的文档以及相关的jar文件已上传</a> </div>
-                </div>
+{#                <div id="notice" class="clearfix">#}
+{#                    <div class="l"> <strong>课程公告:</strong> <a  href="javascript:void(0)">Spring的文档以及相关的jar文件已上传</a> </div>#}
+{#                </div>#}
 
                 <div class="mod-chapters">
                     {% for lesson in course.get_course_lesson %}
@@ -106,11 +106,11 @@
                     <div class="box mb40">
                         <h4>讲师提示</h4>
                         <div class="teacher-info">
-                            <a href="/u/315464/courses?sort=publish" target="_blank">
+                            <a href="{% url 'org:teacher_detail' course.teacher.id %}" target="_blank">
                                 <img src='{{ MEDIA_URL }}{{ course.teacher.image }}' width='80' height='80' />
                             </a>
         <span class="tit">
-          <a href="/u/315464/courses?sort=publish" target="_blank">{{ course.teacher.name }}</a>
+          <a href="{% url 'org:teacher_detail' course.teacher.id %}" target="_blank">{{ course.teacher.name }}</a>
         </span>
                             <span class="job">{{ course.teacher.work_position }}</span>
                         </div>
@@ -145,16 +145,6 @@
                                     </li>
 
                                     {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="cp-tab-pannel js-comp-tab-pannel" data-pannel="plan">
-                                <ul class="other-list">
-                                    <li class="curr">
-                                        <a href="/course/programdetail/pid/31?src=sug" target="_blank">
-                                            <img src="http://img.mukewang.com/56551e6700018b0c09600720-240-135.jpg" alt="Java工程师">
-                                            <span class="name autowrap">Java工程师</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>

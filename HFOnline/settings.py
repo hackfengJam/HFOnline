@@ -145,11 +145,11 @@ USE_TZ = False
 
 STATIC_URL = config["static"]["url"]
 
-# STATIC_ROOT = config["static"]["root"]
+STATIC_ROOT = config["static"]["root"]
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
 
 EMAIL_HOST = config["email"]["host"]
 EMAIL_PORT = config["email"]["port"]
@@ -160,4 +160,4 @@ EMAIL_FROM = config["email"]["from"]  # 发件人
 
 MEDIA_URL = config["media"]["url"]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
