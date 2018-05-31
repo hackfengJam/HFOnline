@@ -4,7 +4,7 @@ from datetime import datetime
 
 from django.db import models
 from organization.models import CourseOrg, Teacher
-from DjangoUeditor.models import UEditorField
+# from DjangoUeditor.models import UEditorField
 
 
 # from apps.organization.models import CourseOrg, Teacher
