@@ -50,8 +50,8 @@ urlpatterns = [
     # 配置上传文件的处理函数
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 
-    # 为了debug为True
-    url(r'^static/(?P<path>.*)$', serve, {"document_root": STATIC_ROOT}),
+    # # 为了debug为True
+    # url(r'^static/(?P<path>.*)$', serve, {"document_root": STATIC_ROOT}),
 
     # 用户相关url配置
     url(r'^users/', include('users.urls', namespace="users")),
