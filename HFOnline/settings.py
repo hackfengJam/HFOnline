@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = config["secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config['debug']
+DEBUG = True if config['debug'] == "yes" else False
 
 ALLOWED_HOSTS = ['*']
 
@@ -148,9 +148,9 @@ STATIC_URL = config["static"]["url"]
 
 # STATIC_ROOT = config["static"]["root"]
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 EMAIL_HOST = config["email"]["host"]
 EMAIL_PORT = config["email"]["port"]
