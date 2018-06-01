@@ -350,7 +350,6 @@ class MymessageView(LoginRequiredMixin, View):
 
 class IndexView(View):
     def get(self, request):
-        print 1 / 0
         all_banners = Banner.objects.all().order_by('index')
         topn_courses = Course.objects.filter(is_banner=False)[:9]
         banner_courses = Course.objects.filter(is_banner=True)[:3]
