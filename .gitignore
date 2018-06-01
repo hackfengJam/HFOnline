@@ -9,3 +9,4 @@ tmp/
 .DS_Store
 apidoc/
 hfonline_env/*
+fabfile.py
