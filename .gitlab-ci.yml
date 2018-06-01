@@ -1,8 +1,12 @@
 before_script:
-    - rm -rf /root/go/src/cloudcare-backend
-    - mkdir -p /root/go/src/cloudcare-backend/
-    - mv * /root/go/src/cloudcare-backend/
-    - cd /root/go/src/cloudcare-backend/
+#    - rm -rf /root/go/src/cloudcare-backend
+    - rm -rf /root/workspaces/ProgramFiles/Py2Code/HFOnline
+#    - mkdir -p /root/go/src/cloudcare-backend/
+    - mkdir -p /root/workspaces/ProgramFiles/Py2Code/HFOnline/
+#    - mv * /root/go/src/cloudcare-backend/
+    - mv * /root/workspaces/ProgramFiles/Py2Code/HFOnline/
+#    - cd /root/go/src/cloudcare-backend/
+    - cd /root/workspaces/ProgramFiles/Py2Code/HFOnline/
 
 stages:
    - deploy

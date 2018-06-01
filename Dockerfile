@@ -2,10 +2,10 @@ FROM python:2.7.10
 
 Label maitainer "hackfunjiang@163.com"
 
-RUN mkdir -p /config/HFOnline
-RUN mkdir /config/logs
+RUN mkdir -p /root/workspaces/ProgramFiles/Py2Code/HFOnline
+RUN mkdir /root/workspaces/logs
 
-ADD . /config/HFOnline/
+ADD . /root/workspaces/ProgramFiles/Py2Code/HFOnline/HFOnline/
 
-WORKDIR /config/HFOnline
-RUN pip install -i https://mirrors.aliyun.com/pypi/simple/ -r /config/HFOnline/requirements.txt
+WORKDIR /root/workspaces/ProgramFiles/Py2Code/HFOnline/HFOnline
+RUN pip install -i https://mirrors.aliyun.com/pypi/simple/ -r /root/workspaces/ProgramFiles/Py2Code/HFOnline/requirements.txt

@@ -8,6 +8,7 @@ import xadmin
 
 from .models import Course, Lesson, Video, CourseResource, BannerCourse
 from organization.models import CourseOrg
+from django.db.models import Sum
 
 
 class LessonInline(object):
@@ -96,6 +97,22 @@ class VideoAdmin(object):
     search_fields = ['lesson', 'name']
     # 过滤器
     list_filter = ['lesson', 'name', 'add_time']
+
+    def save_models(self):
+        obj = self.new_obj
+        obj.save()
+        if obj.lesson is not None and obj.lesson.course is not None:
+            lesson = obj.lesson
+            course = lesson.course
+            all_lesson = Lesson.objects.filter(course=course).all()
+            all_lesson_learn_times = 0
+            for i_lesson in all_lesson:
+                one_lesson_learn_times = Video.objects.filter(lesson=i_lesson).aggregate(Sum('learn_times')).get(
+                    'learn_times__sum', 0)
+                one_lesson_learn_times = one_lesson_learn_times if one_lesson_learn_times is not None else 0
+                all_lesson_learn_times += one_lesson_learn_times
+            course.learn_times = all_lesson_learn_times
+            course.save()
 
 
 class CourseResourceAdmin(object):
