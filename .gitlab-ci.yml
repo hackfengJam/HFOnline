@@ -28,7 +28,7 @@ buildTesting:
     - master
   script:
   - docker build -t HFOnline:testing .
-  - docker tag HFOnline:testing registry.jiagouyun.com/HFOnline:testing
-  - docker push registry.jiagouyun.com/HFOnline:testing
+  - docker tag HFOnline:testing www.hackfeng.cn/HFOnline:testing
+  - docker push www.hackfeng.cn/HFOnline:testing
   tags:
   - docker

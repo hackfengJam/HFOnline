@@ -27,9 +27,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = config["secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True if config['debug'] == "yes" else False
-DEBUG = False
-
+DEBUG = True if config['debug'] == "yes" else False
+# DEBUG = False
+# DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Application definition

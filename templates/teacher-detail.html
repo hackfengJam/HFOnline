@@ -27,23 +27,25 @@
                             <div class="picpic">
                                 <img width="100" height="100" src="{{ MEDIA_URL }}{{ teacher.image }}"/>
                             </div>
-                            <div class="btn">
+                            <div class="btn"  style="margin-left: 50px;">
                                 <span class="fl btn1 collectionbtn" id="jsLeftBtn">
                                      {% if has_teacher_fav %}已收藏{% else %}收藏{% endif %}
                                 </span>
-                                <span class="fr btn2 shareBtn bdsharebuttonbox"
-                                      data-text="授课教师-{{ teacher.name }}-慕学网"
-                                      data-desc="我在#慕课网#发现了"
-                                      data-comment="{{ teacher.name }}，工作年限：{{ teacher.work_years }}年；学历：本科；所在公司：{{ teacher.work_company }}&nbsp;；经典案例：django入门和深入；flask入门"
-                                      data-url="/diary/hk_detail/10/">
-                                    <span class="fl">分享</span>
-                                    <a href="#" class="bds_more" data-cmd="more"></a>
-                                </span>
+{#                                <span class="fr btn2 shareBtn bdsharebuttonbox"#}
+{#                                      data-text="授课教师-{{ teacher.name }}-慕学网"#}
+{#                                      data-desc="我在#慕课网#发现了"#}
+{#                                      data-comment="{{ teacher.name }}，工作年限：{{ teacher.work_years }}年；学历：本科；所在公司：{{ teacher.work_company }}&nbsp;；经典案例：django入门和深入；flask入门"#}
+{#                                      data-url="/diary/hk_detail/10/">#}
+{#                                    <span class="fl">分享</span>#}
+{#                                    <a href="#" class="bds_more" data-cmd="more"></a>#}
+{#                                </span>#}
                             </div>
                         </dt>
                         <dd>
                             <a href="{% url 'org:teacher_detail' teacher.id %}">
-                                <h1>{{ teacher.name }}<span class="key picbig">金牌讲师</span></h1>
+                                <h1>{{ teacher.name }}
+{#                                <span class="key picbig">金牌讲师</span>#}
+                                </h1>
                             </a>
                             <ul class="cont">
                                 <li>工作年限：<span>{{ teacher.work_years }}年</span></li>
