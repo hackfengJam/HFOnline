@@ -37,8 +37,9 @@ class CourseAdmin(object):
     list_editable = ['degree', 'desc']  # 定义字段是否可以直接修改
     exclude = ['fav_nums']
     inlines = [LessonInline, CourseResourceInline]
+
     # refresh_times = [3, 5]  # 可以选择每几秒刷新一次也没
-    import_excel = True
+    # import_excel = True
 
     def queryset(self):
         qs = super(CourseAdmin, self).queryset()

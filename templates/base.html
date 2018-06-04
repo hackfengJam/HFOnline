@@ -86,7 +86,8 @@
 							<li {% if request.path == '/' %}class="active"{% endif %}><a href="{% url 'index' %}">首页</a></li>
 							<li {% if request.path|slice:'7' == '/course' %}class="active"{% endif %}>
 								<a href="{% url 'course:course_list' %}">
-									公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
+									公开课
+{#                                    <img class="hot" src="{% static 'images/nav_hot.png' %}">#}
 								</a>
 							</li>
 							<li {% if request.path|slice:'12' == '/org/teacher' %}class="active"{% endif %}>
