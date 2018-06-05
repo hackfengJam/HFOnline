@@ -5,6 +5,7 @@ __Author__ = "HackFun"
 __Date__ = '2017/9/11 8:48'
 
 import xadmin
+from xadmin import views
 
 from .models import CourseOrg, CityDict, Teacher
 
