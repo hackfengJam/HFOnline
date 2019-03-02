@@ -17,7 +17,8 @@ python manage.py createsuperuser --username 123@123.com --password 123456
 2. 运行命令后，出现如下提示
 ![](./images/hfonline_createsuperuser_demo.jpg "hfonline_createsuperuser_demo")
 
-3. 输入邮箱密码
+3. 输入邮箱密码，输入成功后登录：http://127.0.0.1:8000/xadmin/ ，效果如下 gif 
+
 ![](https://qiniuc.hackfeng.cn/hfonline_xadmin_login.gif "hfonline_xadmin_login")
 
 ### 「管理员管理列表」效果如下
