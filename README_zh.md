@@ -1,18 +1,18 @@
 # HFOnline
-HFOnline 基于Django在线教育系统
+「基于Django在线教育系统」
 
 ## 写在前面
 Introduction-en is [here](./README.md) 
 
-# 快速开始
+## 快速开始
 
-## 环境
+### 环境
 - linux/windows
 - python 2.7
 - mysql 5.6
 - 邮件服务器（本系统使用[网易邮箱](https://mail.163.com)：SMTP服务）
 
-## 步骤
+### 步骤
 1. 执行命令:
 <pre>
 pip install -r requirements.txt
@@ -40,3 +40,9 @@ email:
 <pre>
 python manage.py runserver
 </pre>
+
+## 常见的问题解答
+
+问：如何开启网易邮箱：SMTP服务？
+
+答：网易帮助文档：[163邮箱如何开启POP3/SMTP/IMAP服务？](http://help.163.com/10/0312/13/61J0LI3200752CLQ.html)

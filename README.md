@@ -1,5 +1,5 @@
 # HFOnline
-HFOnline 基于Django在线教育系统
+「Online Education System Based on Django」
 
 ## Venusoneday
 中文文档在[这里](./README_zh.md) 
@@ -42,3 +42,8 @@ email:
 <pre>
 python manage.py runserver
 </pre>
+
+## FAQ
+A: How to open Netease mailbox SMTP service?
+
+Q: Netease help docs：[163邮箱如何开启POP3/SMTP/IMAP服务](http://help.163.com/10/0312/13/61J0LI3200752CLQ)
