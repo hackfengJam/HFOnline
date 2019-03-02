@@ -38,7 +38,11 @@ email:
   use_tls: "no"
   from: 'xxxx@163.com' # 你的邮箱
 </pre>
-3. run server
+3. db migration
+<pre>
+python manage.py makemigrations
+</pre>
+4. run server
 <pre>
 python manage.py runserver
 </pre>
