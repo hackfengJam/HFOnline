@@ -1,24 +1,27 @@
-secret_key: '*************************'
+debug: "yes"
+#debug: no
+secret_key: '#ouxxxxxxxvh(k5txxxxxxxxxr#*h$v3287*kke#'
+
 mysql:
-  database: 'xxx'
-  username: 'xxx'
-  password: 'xxx'
-  host: 'xx.xx.xx.xx'
+  database: 'hfonline'
+  username: 'xxxxxxxx'
+  password: 'xxxxxxxx'
+  host: '127.0.0.1'
   port: 3306
   charset: 'utf8'
 
 email:
-  host: 'xxxx.xxx.com'
+  host: 'smtp.163.com'
   port: 25
-  host_user: 'xxx@xxx.com'
-  host_password: 'xxxxxx'
-  use_tls: no
-  from: 'xxx@xxx.com'
+  host_user: 'hackfunjiang@163.com'
+  host_password: 'xxxxxxxx'
+  use_tls: "no"
+  from: 'hackfunjiang@163.com'
 
 media:
-  url: '/xxxx/'
-  root: 'xxxx'
+  url: '/media/'
+  root: ''
 
 static:
-  url: '/xxxxx/'
-  root: '/xxxxx/'
+  url: '/static/'
+  root: '/static/'

@@ -1,26 +1,24 @@
 # HFOnline
 HFOnline 基于Django在线教育系统
 
-## Venusoneday
-中文文档在[这里](./README_zh.md) 
+## 写在前面
+Introduction-en is [here](./README.md) 
 
-# Quickstart
+# 快速开始
 
-## Environment
+## 环境
 - linux/windows
 - python 2.7
 - mysql 5.6
-- mail server (This system uses [Netease mailbox](https://mail.163.com) : STMP service)
+- 邮件服务器（本系统使用[网易邮箱](https://mail.163.com)：SMTP服务）
 
-## Step:
-
-1. run command:
+## 步骤
+1. 执行命令:
 <pre>
 pip install -r requirements.txt
 cp ./config/config.yaml.example ./config/config.yaml
 </pre>
-
-2.  edit config.yaml
+2. 编辑 config.yaml
 <pre>
 mysql:
   database: 'hfonline'
@@ -38,7 +36,7 @@ email:
   use_tls: "no"
   from: 'xxxx@163.com' # 你的邮箱
 </pre>
-3. run server
+3. 启动服务
 <pre>
 python manage.py runserver
 </pre>
