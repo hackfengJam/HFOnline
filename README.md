@@ -10,7 +10,7 @@
 - linux/windows
 - python 2.7
 - mysql 5.6
-- mail server (This system uses [Netease mailbox](https://mail.163.com) : STMP service)
+- mail server (This system uses [Netease mailbox](https://mail.163.com) : SMTP service)
 
 ## Step:
 
@@ -48,6 +48,6 @@ python manage.py runserver
 </pre>
 
 ## FAQ
-A: How to open Netease mailbox SMTP service?
+Q: How to open Netease mailbox SMTP service?
 
-Q: Netease help docs：[163邮箱如何开启POP3/SMTP/IMAP服务](http://help.163.com/10/0312/13/61J0LI3200752CLQ)
+A: Netease help docs：[163邮箱如何开启POP3/SMTP/IMAP服务](http://help.163.com/10/0312/13/61J0LI3200752CLQ)

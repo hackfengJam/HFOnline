@@ -10,7 +10,7 @@ Introduction-en is [here](./README.md)
 - linux/windows
 - python 2.7
 - mysql 5.6
-- 邮件服务器（本系统使用[网易邮箱](https://mail.163.com)：SMTP服务）
+- 邮件服务器（本系统使用[网易邮箱](https://mail.163.com)：SMTP 服务）
 
 ### 步骤
 1. 执行命令:
@@ -47,6 +47,6 @@ python manage.py runserver
 
 ## 常见的问题解答
 
-问：如何开启网易邮箱：SMTP服务？
+问：如何开启网易邮箱：SMTP 服务？
 
 答：网易帮助文档：[163邮箱如何开启POP3/SMTP/IMAP服务？](http://help.163.com/10/0312/13/61J0LI3200752CLQ.html)
