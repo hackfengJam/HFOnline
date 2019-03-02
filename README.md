@@ -41,11 +41,15 @@ email:
 3. db migration
 <pre>
 python manage.py makemigrations
+python manage.py migrate
 </pre>
 4. run server
 <pre>
 python manage.py runserver
 </pre>
+
+## Demo
+demo is [here](./readme_detail/hfonline_detail.md) 
 
 ## FAQ
 Q: How to open Netease mailbox SMTP service?

@@ -39,11 +39,15 @@ email:
 3. 数据库迁移
 <pre>
 python manage.py makemigrations
+python manage.py migrate
 </pre>
 4. 启动服务
 <pre>
 python manage.py runserver
 </pre>
+
+## 示例
+示例在[这里](./readme_detail/hfonline_detail.md) 
 
 ## 常见的问题解答
 
