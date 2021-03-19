@@ -23,7 +23,7 @@ idna==2.6
 ipaddress==1.0.18
 itsdangerous==0.24
 jdcal==1.4
-Jinja2==2.10
+Jinja2==2.11.3
 lml==0.0.1
 MarkupSafe==1.0
 maxminddb==1.3.0
