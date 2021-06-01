@@ -41,7 +41,7 @@ PyMySQL==0.8.0
 python-dateutil==2.6.1
 python-openid==2.2.5
 pytz==2017.3
-PyYAML==4.2b1
+PyYAML==5.4
 redis==2.10.6
 six==1.11.0
 tablib==0.12.1
